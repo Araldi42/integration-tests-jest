@@ -108,7 +108,6 @@ describe('JSONPlaceholder API - Testes de múltiplas rotas e métodos', () => {
     await fetchUrl('https://jsonplaceholder.typicode.com/posts/1', {
       method: 'DELETE'
     });
-    // Não há confirmação direta de exclusão, mas podemos verificar que o post não existe mais
     try {
       await fetchUrl('https://jsonplaceholder.typicode.com/posts/1');
     } catch (error) {

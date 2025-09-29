@@ -20,7 +20,7 @@ describe('Pactum - Testes da API JSONPlaceholder', () => {
       });
   });
 
-  test('GET /comments?postId=1 - Deve retornar comentários do post 1', async () => {
+  test('GET BASE_URL/comments?postId=1 - Deve retornar comentários do post 1', async () => {
     await pactum.spec()
       .get(`${BASE_URL}/comments`)
       .withQueryParams('postId', 1)
@@ -29,7 +29,7 @@ describe('Pactum - Testes da API JSONPlaceholder', () => {
       .expectJsonLength(5);
   });
 
-  test('POST /posts - Deve criar um novo post com sucesso', async () => {
+  test('POST BASE_URL/posts - Deve criar um novo post com sucesso', async () => {
     const payload = {
       title: 'Novo Post Pactum',
       body: 'Conteúdo via Pactum',
@@ -48,7 +48,7 @@ describe('Pactum - Testes da API JSONPlaceholder', () => {
       });
   });
 
-  test('PUT /posts/1 - Deve atualizar o post com id 1', async () => {
+  test('PUT BASE_URL/posts/1 - Deve atualizar o post com id 1', async () => {
     const payload = {
       title: 'Atualizado via PUT',
       body: 'Novo conteúdo',
@@ -62,7 +62,7 @@ describe('Pactum - Testes da API JSONPlaceholder', () => {
       .expectJsonLike({ id: 1, ...payload });
   });
 
-  test('PATCH /posts/1 - Deve atualizar parcialmente o título', async () => {
+  test('PATCH BASE_URL/posts/1 - Deve atualizar parcialmente o título', async () => {
     const patchData = { title: 'Título Alterado Parcialmente' };
 
     await pactum.spec()
@@ -72,33 +72,33 @@ describe('Pactum - Testes da API JSONPlaceholder', () => {
       .expectJsonLike({ id: 1, title: patchData.title });
   });
 
-  test('DELETE /posts/1 - Deve excluir um post', async () => {
+  test('DELETE BASE_URL/posts/1 - Deve excluir um post', async () => {
     await pactum.spec()
       .delete(`${BASE_URL}/posts/1`)
       .expectStatus(200);
   });
 
-  test('GET /invalid - Deve retornar 404 para rota inválida', async () => {
+  test('GET BASE_URL/invalid - Deve retornar 404 para rota inválida', async () => {
     await pactum.spec()
       .get(`${BASE_URL}/invalid`)
       .expectStatus(404);
   });
 
-  test('GET /users - Deve retornar cabeçalhos de resposta padrão', async () => {
+  test('GET BASE_URL/users - Deve retornar cabeçalhos de resposta padrão', async () => {
     await pactum.spec()
       .get(`${BASE_URL}/users`)
       .expectStatus(200)
       .expectHeader('content-type', /application\/json/);
   });
 
-  test('GET /posts - Deve conter um post com userId 1', async () => {
+  test('GET BASE_URL/posts - Deve conter um post com userId 1', async () => {
     await pactum.spec()
       .get(`${BASE_URL}/posts`)
       .expectStatus(200)
       .expectBodyContains('userId');
   });
 
-  test('GET /todos/1 - Deve validar dados de uma tarefa', async () => {
+  test('GET BASE_URL/todos/1 - Deve validar dados de uma tarefa', async () => {
     await pactum.spec()
       .get(`${BASE_URL}/todos/1`)
       .expectStatus(200)
